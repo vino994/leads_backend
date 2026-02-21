@@ -65,7 +65,9 @@ app.get("/", (req, res) => {
 mongoose.connect(process.env.MONGO_URI)
   .then(async () => {
     console.log("MongoDB Connected");
-    await connectRedis();
+   if (process.env.REDIS_URL) {
+  await connectRedis();
+}
     console.log("Redis Connected");
   })
   .catch(err => console.log(err));
