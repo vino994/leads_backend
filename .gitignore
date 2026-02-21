@@ -1,0 +1,11 @@
+/nodejs
+/env
+/dist
+/build
+/coverage
+/logs
+*.log
+*.env
+.DS_Store  
+node_modules
+.env
