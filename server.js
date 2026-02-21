@@ -12,7 +12,6 @@ const leadRoutes = require("./routes/leadRoutes");
 const app = express();
 
 /* ---------------- CORS CONFIG ---------------- */
-
 const allowedOrigins = [
   "http://localhost:5173",
   "https://jleeds.vercel.app"
@@ -20,7 +19,7 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // allow non-browser requests
+    if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -28,12 +27,10 @@ app.use(cors({
       callback(new Error("Not allowed by CORS"));
     }
   },
-  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
-/* IMPORTANT: Handle preflight requests */
-app.options("*", cors());
+
 
 /* ---------------- GLOBAL MIDDLEWARE ---------------- */
 
