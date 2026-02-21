@@ -56,7 +56,11 @@ exports.generateLeads = async (location, businessType, count) => {
     const cacheKey = `${location}-${businessType}-${count}`;
 
     // ✅ CHECK CACHE FIRST
-    const cached = await redis.get(cacheKey);
+   let cached = null;
+
+if (process.env.REDIS_URL) {
+  cached = await redis.get(cacheKey);
+}
     if (cached) {
       console.log("Serving from cache");
       return JSON.parse(cached);
@@ -97,7 +101,9 @@ exports.generateLeads = async (location, businessType, count) => {
     }
 
     // ✅ SAVE TO CACHE (30 mins)
-    await redis.setEx(cacheKey, 1800, JSON.stringify(finalData));
+   if (process.env.REDIS_URL) {
+  await redis.setEx(cacheKey, 1800, JSON.stringify(finalData));
+}
 
     return finalData;
 

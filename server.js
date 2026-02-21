@@ -35,7 +35,7 @@ app.use(cors({
 /* ---------------- GLOBAL MIDDLEWARE ---------------- */
 
 app.use(express.json());
-
+app.set("trust proxy", 1);
 /* ---------------- RATE LIMITER ---------------- */
 
 const limiter = rateLimit({
